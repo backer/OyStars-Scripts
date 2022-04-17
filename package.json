@@ -1,0 +1,30 @@
+{
+  "name": "oystars-scripts",
+  "version": "1.0.0",
+  "description": "Scripts used for data management for the OyStars Stats apps and middleware",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/backer/OyStars-Scripts.git"
+  },
+  "keywords": [
+    "oystars",
+    "stats",
+    "scripts",
+    "node"
+  ],
+  "author": "Brian Acker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/backer/OyStars-Scripts/issues"
+  },
+  "homepage": "https://github.com/backer/OyStars-Scripts#readme",
+  "dependencies": {
+    "csv": "^6.0.5",
+    "csv-parser": "^3.0.0",
+    "node-fetch": "^3.2.3"
+  }
+}
