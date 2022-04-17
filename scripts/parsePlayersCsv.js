@@ -2,10 +2,14 @@
 
 console.log("Test script starting.");
 const [, , ...args] = process.argv;
-// const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 const fs = require("fs");
 const csv = require("csv-parse");
 const path = require("path");
+
+const MIDDLEWARE_BASE_URL = `https://5c75f3ks0k.execute-api.us-east-1.amazonaws.com`;
+const SOCCER_PATH = `/soccer`;
+const PLAYERS_PATH = `/players`;
 
 const SOURCE = {
   url: "url=",
@@ -42,16 +46,21 @@ function parseCsvFile(file) {
     const fs = require('fs'); 
     const csv = require('csv-parser');
 
+    var players = [];
+
     fs.createReadStream(file)
       .pipe(csv())
       .on('data', function(data){
       try {
-        console.log(`Name is: ${data.name}`);
-        console.log(`goals is ${data.goals}`);
-        console.log(`assists is ${data.assists}`);
-        console.log(`number is ${data.number}`);
+        var player = {
+          'name': data.name,
+          'number': data.number,
+          'goals': data.goals,
+          'assists': data.assists
+        };
+        console.log(`Parsed player data: ${JSON.stringify(player)}`);
 
-        //perform the operation
+        players.push(player);
       }
       catch(err) {
         //error handler
@@ -60,10 +69,35 @@ function parseCsvFile(file) {
     })
     .on('end',function(){
       //some final operation
-      console.log(`csv parsing finished`);
+      console.log(`csv parsing finished, beginning upload of player data`);
+      players.forEach(player => {
+        uploadPlayerData(player);
+      });
+      console.log(`Finished uploading player data`);
     }); 
   } else {
     console.log(`Error: file path is null or empty`);
     return 1;
+  }
+}
+
+async function uploadPlayerData(player) {
+  try {
+    const response = await fetch(
+      `${MIDDLEWARE_BASE_URL}${SOCCER_PATH}${PLAYERS_PATH}`,
+      {
+        method: 'post',
+        body: JSON.stringify(player),
+        headers: {'Content-Type': 'application/json'}
+      }
+    );
+
+    if (response.ok) {
+      console.log(`Successfully uploaded player: ${JSON.stringify(player)}`);
+    } else {
+      console.log(`Error uploading player data: ${response.status}`);
+    }
+  } catch (error) {
+    console.log(`Error uploading player data: ${error}`);
   }
 }
