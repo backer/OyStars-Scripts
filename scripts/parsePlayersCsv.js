@@ -55,8 +55,8 @@ function parseCsvFile(file) {
         var player = {
           'name': data.name,
           'number': data.number ? parseInt(data.number) : 0,
-          'goals': parseInt(data.goals),
-          'assists': parseInt(data.assists)
+          'goals': data.goals ? parseInt(data.goals) : 0,
+          'assists': data.assists ? parseInt(data.assists) : 0
         };
         console.log(`Parsed player data: ${JSON.stringify(player)}`);
 
