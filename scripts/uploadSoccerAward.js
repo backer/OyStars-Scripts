@@ -80,12 +80,12 @@ function parseCsvFile(file, awardName) {
         console.log(`Error parsing csv data: ${err}`);
       }
     })
-    .on('end',function(){
+    .on('end', async function() {
       console.log(`csv parsing finished, uploading award data`);
 
-      awards.forEach(award => {
-        uploadAwardData(award);
-      });
+      for (const award of awards) {
+        await uploadAwardData(award);
+      }
       console.log(`Finished uploading award data`);
     }); 
   } else {
