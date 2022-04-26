@@ -34,3 +34,11 @@ The file argument should be a csv with just the list of players with fields for 
 If rushing is included, it will be combined with the receiving stats as we no longer record rushing and have very little existing rushing stats.
 
 Usage is `node uploadFootballGame.js season_id=<season id> result=<w/l/d> team_score=<points scored by OyStars> opponent_score=<points scored by opponent> opponent_name=<team name of opponent> file=<full file path to player stats csv>`
+
+## Upload Football Award Data
+This script accepts award name and award winners csv file to parse and upload the resulting data to dynamoDB via the OyStars-Middleware APIs. <br>
+The file argument should be a csv with the list of award winners with fields: session, year, name, notable_stats
+
+Usage is `node scripts/uploadFootballAward award={award name} file={award winners csv full file path}`
+
+example csv file: [example/example_football_awards.csv](https://github.com/backer/OyStars-Scripts/blob/ac8449876b9ddc726cd54e6d2afd73bab25f88f8/example/example_football_awards.csv)
