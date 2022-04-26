@@ -93,9 +93,9 @@ function parseCsvFile(file, season_id, result, team_score, opponent_score, oppon
         var player = {
           'name': data.name,
         };
-        for (field in footballStatsFields) {
+        footballStatsFields.forEach(field => {
           player[field] = data[field] ? parseFloat(data[field]) : 0;
-        }
+        });
 
         // combine rushing stats receiving if included
         if (data.rushing_yards) {
