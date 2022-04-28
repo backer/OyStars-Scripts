@@ -99,13 +99,13 @@ function parseCsvFile(file, season_id, result, team_score, opponent_score, oppon
 
         // combine rushing stats receiving if included
         if (data.rushing_yards) {
-          player.receiving_yards += data.rushing_yards;
+          player.receiving_yards = parseInt(player.receiving_yards) + parseInt(data.rushing_yards);
         }
         if (data.rushing_touchdowns) {
-          player.receiving_touchdowns += data.rushing_touchdowns;
+          player.receiving_touchdowns = parseInt(player.receiving_touchdowns) + parseInt(data.rushing_touchdowns);
         }
         if (data.rushing_pats) {
-          player.receiving_pats += data.rushing_pats;
+          player.receiving_pats = parseInt(player.receiving_pats) + parseInt(data.rushing_pats);
         }
         console.log(`Parsed player data: ${JSON.stringify(player)}`);
 
